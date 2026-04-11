@@ -1,10 +1,12 @@
 from flask import Flask, render_template, request
 import requests
+from dotenv import load_dotenv
+load_dotenv()
 import os
 
 app = Flask(__name__)
 
-API_KEY = os.getenv("271372df647acf07335e8ab7c7e6dc69")  # secure key
+API_KEY ="271372df647acf07335e8ab7c7e6dc69"  # secure key
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
@@ -34,4 +36,4 @@ def home():
     return render_template("index.html", weather=weather, error=error)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
